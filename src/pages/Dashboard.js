@@ -22,8 +22,16 @@ function Dashboard() {
   const closeShowAdd = () => setshow(false)
 
   let data = ListTransaction
+  data = JSON.parse(JSON.stringify(data))
   console.log(data)
 
+  let resultIncome = data.filter(item => item.type === "INCOME").reduce((total, currentValue) => total = total + currentValue.nominal, 0)
+  let resultExpanses = data.filter(item => item.type === "EXPANSES").reduce((total, currentValue) => total = total + currentValue.nominal, 0)
+
+  console.log(resultIncome)
+  console.log(resultExpanses)
+
+  
   return (
     <div className='bg-light'>
       <NavGuest />
@@ -33,14 +41,14 @@ function Dashboard() {
             Pemasukan bulan ini 
             <div className='money d-flex mt-3 justify-content-center'>
               <img src={MoneyCheck} alt="Money Check" width={55}/>
-              <div className='align-middle py-2 fs-4 fw-bold ms-2'>Rp. 4.000.000,-</div>
+              <div className='align-middle py-2 fs-4 fw-bold ms-2'>{rupiahFormat.convert(resultIncome)}</div>
             </div>
           </div>
           <div className='col-1 col-lg-3 bg-white p-3 text-center rounded-4 shadow mx-4'>
             Pengeluaran bulan ini 
             <div className='money d-flex mt-3 justify-content-center'>
               <img src={MoneyRemove} alt="Money Check" width={55}/>
-              <div className='align-middle py-2 fs-4 fw-bold ms-2'>Rp. 4.000.000,-</div>
+              <div className='align-middle py-2 fs-4 fw-bold ms-2'>{rupiahFormat.convert(resultExpanses)}</div>
             </div>
           </div>
           <div className='col-1 col-lg-3 bg-white p-3 text-center rounded-4 shadow mx-4'>
@@ -64,7 +72,7 @@ function Dashboard() {
             <div>
               <div htmlFor="">Type</div>
               <select name="" id="" className='p-1 form-control'>
-                <option value="" selected hidden> Select type </option>
+                <option value="" hidden> Select type </option>
                 <option value="">Pemasukan</option>
                 <option value="">pengeluaran</option>
               </select>
@@ -82,13 +90,16 @@ function Dashboard() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>Date</td>
-                  <td>@mdo</td>
-                </tr>
+                {data.map((item, index) => (
+                    <tr key={index} className={`bg-${item.type}`}>
+                      <td>{item.id}</td>
+                      <td>{item.description}</td>
+                      <td>{item.category.name}</td>
+                      <td>{item.date}</td>
+                      <td>{item.nominal}</td>
+                    </tr>
+                  ))
+                }
               </tbody>
             </Table>
           </div>

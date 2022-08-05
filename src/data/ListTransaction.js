@@ -32,5 +32,22 @@ export const ListTransaction = [
     },
     "description": "Membeli makanan di RM Padang",
     "createdAt": "20-20-2020"
-  }
+  },
+  {
+    "id": 3,
+    "userId": 2,
+    "user": {
+      "balance": 20000,
+    },
+    "type": "INCOME",
+    "nominal": 10000,
+    "date": "20-20-2022",
+    "categoryId": 1,
+    "category":{
+      "id": 1,
+      "name": "Bonus"  
+    },
+    "description": "Bonus bulan sekarang",
+    "createdAt": "20-20-2020"
+  },
 ]

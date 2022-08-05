@@ -37,13 +37,13 @@ function AddNote({ show, handleClose }) {
                 />
                 <div className="text-start mt-3">Category</div>
                 <select name="category" id="" className='form-select py-2 px-3'>
-                  <option value="" selected hidden>Select category</option>
+                  <option value="" hidden>Select category</option>
                   <option value="">Makanan</option>
                   <option value="">Lain-lain</option>
                 </select>
                 <div className="text-start mt-3">Type</div>
                 <select name="type" id="" className='form-select py-2 px-3'>
-                  <option value="" selected hidden>Select type</option>
+                  <option value="" hidden>Select type</option>
                   <option value="">Pemasukan</option>
                   <option value="">Pengeluaran</option>
                 </select>

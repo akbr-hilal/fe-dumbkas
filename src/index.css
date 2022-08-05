@@ -47,3 +47,11 @@ code {
 .regis:hover{
   color: #b02a37;
 }
+
+.bg-INCOME {
+  background-color: #65C18C;
+}
+
+.bg-EXPANSES{
+  background-color: #FF6363;
+}
