@@ -25,13 +25,19 @@ function Dashboard() {
   data = JSON.parse(JSON.stringify(data))
   console.log(data)
 
+  // Sum Income & Expanses
   let resultIncome = data.filter(item => item.type === "INCOME").reduce((total, currentValue) => total = total + currentValue.nominal, 0)
   let resultExpanses = data.filter(item => item.type === "EXPANSES").reduce((total, currentValue) => total = total + currentValue.nominal, 0)
 
   console.log(resultIncome)
   console.log(resultExpanses)
 
-  
+  // Select type
+  const [selects, setSelects] = useState()
+
+  const getSelect = selects ? selects : "All"
+  console.log(getSelect)
+
   return (
     <div className='bg-light'>
       <NavGuest />
@@ -52,7 +58,7 @@ function Dashboard() {
             </div>
           </div>
           <div className='col-1 col-lg-3 bg-white p-3 text-center rounded-4 shadow mx-4'>
-            Pendapatan bulan ini 
+            Balance bulan ini 
             <div className='money d-flex mt-3 justify-content-center'>
               <img src={MoneyIncome} alt="Money Check" width={55}/>
               <div className='align-middle py-2 fs-4 fw-bold ms-2'>{rupiahFormat.convert(data[0].user.balance)}</div>
@@ -70,12 +76,12 @@ function Dashboard() {
               <input type="date" className='p-1 form-control' />
             </div>
             <div>
-              <div htmlFor="">Type</div>
-              <select name="" id="" className='p-1 form-control'>
-                <option value="" hidden> Select type </option>
-                <option value="">Pemasukan</option>
-                <option value="">pengeluaran</option>
-              </select>
+              <div htmlFor="type">Type</div>
+              <select id="type" className='p-1 form-control pe-5' value={selects} onChange={(e) => setSelects(e.target.value)}>
+                <option>All</option>
+                <option>Income</option>                
+                <option>Expanses</option>                
+              </select> 
             </div>
           </div>
           <div className='mt-3'>
@@ -90,16 +96,49 @@ function Dashboard() {
                 </tr>
               </thead>
               <tbody>
-                {data.map((item, index) => (
-                    <tr key={index} className={`bg-${item.type}`}>
-                      <td>{item.id}</td>
-                      <td>{item.description}</td>
-                      <td>{item.category.name}</td>
-                      <td>{item.date}</td>
-                      <td>{item.nominal}</td>
-                    </tr>
-                  ))
-                }
+                {getSelect === "All" ? (
+                  <>
+                  {data.map((item, index) => (
+                      <tr key={index} className={`bg-${item.type}`}>
+                        <td>{item.id}</td>
+                        <td>{item.description}</td>
+                        <td>{item.category.name}</td>
+                        <td>{item.date}</td>
+                        <td>{item.nominal}</td>
+                      </tr>
+                    ))
+                  }
+                  </> 
+                ) : (
+                  getSelect === "Income" ? (
+                    <>
+                    {data.filter(item => item.type === "INCOME").map((item, index) => (
+                      <tr key={index} className={`bg-${item.type}`}>
+                        <td>{item.id}</td>
+                        <td>{item.description}</td>
+                        <td>{item.category.name}</td>
+                        <td>{item.date}</td>
+                        <td>{item.nominal}</td>
+                      </tr>
+                    ))}
+                    </>
+                  ) : (
+                    getSelect === "Expanses" ? (
+                      <>
+                      {data.filter(item => item.type === "EXPANSES").map((item, index) => (
+                        <tr key={index} className={`bg-${item.type}`}>
+                          <td>{item.id}</td>
+                          <td>{item.description}</td>
+                          <td>{item.category.name}</td>
+                          <td>{item.date}</td>
+                          <td>{item.nominal}</td>
+                        </tr>
+                      ))}
+                      </>
+                    ) : ("")
+                  )
+                )}
+
               </tbody>
             </Table>
           </div>
