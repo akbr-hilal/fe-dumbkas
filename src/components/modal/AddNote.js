@@ -17,48 +17,40 @@ function AddNote({ show, handleClose }) {
               // onSubmit={(e) => handleSubmit.mutate(e)}
             >
               <div className="form text-center">
-                <div className="text-start">Nominal</div>
+                <div className="text-start">Amount</div>
                 <input 
                   type="number" 
                   placeholder="Nominal" 
                   name="nominal" 
-                  className="px-3 py-2 col-12" 
+                  className="px-3 py-2 col-12 inputAuth" 
                   // value={email} 
                   // onChange={handleChange}
                 />
-                <div className="text-start mt-3">Tanggal</div>
-                <input 
+                <div className="text-start mt-3">Date</div>
+                <input  
                   type="date" 
                   placeholder="Date" 
                   name="nominal" 
-                  className="px-3 py-2 col-12" 
+                  className="px-3 py-2 col-12 inputAuth" 
                   // value={email} 
                   // onChange={handleChange}
                 />
                 <div className="text-start mt-3">Category</div>
-                <select name="category" id="" className='form-select py-2 px-3'>
-                  <option value="" hidden>Select category</option>
-                  <option value="">Makanan</option>
-                  <option value="">Lain-lain</option>
-                </select>
-                <div className="text-start mt-3">Type</div>
-                <select name="type" id="" className='form-select py-2 px-3'>
-                  <option value="" hidden>Select type</option>
-                  <option value="">Pemasukan</option>
-                  <option value="">Pengeluaran</option>
-                </select>
+                <div className='inputAuth'>
+                  <select name="category" id="" className='form-select py-2 px-3 bg-0 bg-transparent'>
+                    <option value="" hidden className='inputAuth'>Select category</option>
+                    <option value="">Makanan</option>
+                    <option value="">Lain-lain</option>
+                  </select>
+                </div>
+
                 <div className="text-start mt-3">Description</div>
-                <input 
-                  type="text" 
-                  placeholder="Description" 
-                  name="description" 
-                  className="px-3 py-2 col-12" 
-                  // value={email} 
-                  // onChange={handleChange}
-                />
+                <div className='inputAuth'>
+                  <textarea className="form-control bg-transparent" rows="3"></textarea>
+                </div>
               </div>
               <div className="mt-3 text-end">
-                <button className="btn btn-danger col-12">Add Note</button>
+                <button className="btn-input col-12">Add Note</button>
               </div>
             </form>
           </div>
